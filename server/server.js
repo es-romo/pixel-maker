@@ -27,6 +27,20 @@ app.get('/', async (req,res) => {
     res.send(pixels)
 })
 
+app.get('/:id', async (req, res) => {
+    try{
+        const pixel = await Pixel.findOne({ _id: req.params.id })
+        pixel.accessed.push({
+            date: Date.now(),
+            ip: req.ip
+        })
+        await pixel.save()
+    }catch(err){
+        console.log(err)
+    }
+    res.sendFile(path.join(__dirname,'assets/img.jpeg'))
+})
+
 app.route('/pixel')
     
     .post( async (req, res) => {
