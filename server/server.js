@@ -17,7 +17,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
     //Launch server
     app.listen(process.env.PORT,()=>{
-        console.log(`Listening at http://localhost:${process.env.PORT}`)
+        console.log(`Listening at http://localhost:${process.env.PORT || 8080}`)
     })
 });
 
